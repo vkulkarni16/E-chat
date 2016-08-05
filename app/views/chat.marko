@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head> 
+        <title>E-Chatroom</title>
+        <link rel='stylesheet' href='/css/style.css'/>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    </head>    
+    <body>  
+        <h3>E-Chatroom</h3>
+        <div class="container">
+            <div class="row">
+                <div if(data.user)><h5><span id="userInfo" rel="${data.user.username}">${data.user.fullname}</span></h5></div>
+                <div if(data.user)><span><a href="/logout"> Logout </a></span></div>
+                <div class="row">
+                    <div class="col-md-3 well">
+                         <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Friends..">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                        </div>
+                        <br/>
+                        <ul id="participants" class="nav ">
+                            <!-- participants list -->
+                        </ul>
+                   </div>
+                    <div class="col-md-6 postreply" id="chatWindow">
+                        <div class="jumbotron">
+                            <div id="participantName"></div>
+                            <div id="messages"></div>
+                            <form id="messageForm" style='max-width: 300px;'>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="4" cols="50" placeholder="Message" maxlength=200 id="outgoingMessage"/>
+                                </div>
+                                <button class="btn btn-primary" type="button" id="send"> Share</button>
+                            </form> 
+                        </div>
+                    </div>        
+                </div>
+            </div>    
+        </div>                       
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="//code.jquery.com/jquery-2.0.0.min.js"></script>
+        <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>
+        <script src="/js/socket.js"></script>
+    </body> 
+</html>        
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head> 
+        <title>Login</title>
+        <meta name='viewport'  content='width=device-width initial-scale=1.0'/>
+        <link rel='stylesheet' href='/css/style.css'/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    </head>    
+    <body>
+        <div if(!data.user)>
+            <a href="/login">Login</a>
+            <br/>
+            <a href="register">Register</a>
+        </div>
+        <div else>
+            <p> You are currently logged in as ${data.user.fullname} </p>
+            <a href="/logout"> Logout </a>
+        </div>
+    
+    	<script src='http://code.jquery.com/jquery.js'></script>
+  		<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>
+  	</body>
+</html>

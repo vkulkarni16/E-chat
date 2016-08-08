@@ -5,3 +5,4 @@ mean-chat
 app/views/*.js
 public/css/*.css
 *.log
+express

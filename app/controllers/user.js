@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var templateSignup = require('marko').load(require.resolve('./../views/signup.marko'));
+var template = require('marko').load(require.resolve('./../views/chat.marko'));
+var test = require('marko').load(require.resolve('./../views/test.marko'));
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 
@@ -11,6 +13,10 @@ module.exports = function (app) {
 
 router.get('/', function (req, res) {
     res.redirect('/signup');
+});
+
+router.get('/test', function (req, res) {
+    test.render({}, res);
 });
 
 router.get('/signup', function(req, res) {
@@ -30,8 +36,19 @@ router.get('/logout', function(req, res) {
     res.redirect('/signup');
 });
 
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
+router.get('/webchat', isLoggedIn ,function (req, res, next) {
+  User.find({ username : req.user.username }, 
+    { contactlists: true, _id: false } , (err, users) => {
+    if(!err)
+      User.find({ username : { "$in" : users[0].contactlists } }, (err, contactlists ) => {
+        if(!err)
+          template.render({ user : req.user , contactlists : contactlists }, res);
+        else
+          template.render({ user : req.user , error: err }, res);
+      })
+    else
+      template.render({ user : req.user , error: err }, res);
+  });
 });
 
 router.post('/register', (req, res) => {
@@ -47,15 +64,22 @@ router.post('/register', (req, res) => {
 			templateSignup.render({ error: err , user : data}, res);
 		}	
 		passport.authenticate('local')(req, res, function () {
-            res.redirect('/signup');
+            res.redirect('/webchat');
         })
 	});
 });
    
-router.get('/userlist', (req, res) =>  {
-	User.find({},{} , (err, data) => {
-		if(!err)
-			res.json(data);
+router.get('/searchContacts', (req, res) =>  {
+	var value = req.query.srcInput;
+	console.log("value"+ value);
+	User.find({ fullname : { $regex : new RegExp(value+'*.', "i") } }, 
+			{ username: true, fullname: true, _id: false } , (err, data) => {
+		if(!err){
+			res.json({
+				status : "success",
+				data : data
+			})	
+		}
 		else
 			res.json({
 				error : err
@@ -63,102 +87,51 @@ router.get('/userlist', (req, res) =>  {
 	});
 });
 
-// router.post('/addreview', (req, res) => {
-// 	var review_data = {
-// 		name	: req.body.review_name,
-// 	  	review  : req.body.review_dsc,
-// 	 	rate    : req.body.review_rating
-// 	};
-// 	var id = req.body._id;
+router.post('/addContact', (req, res) =>  {
+	var newUserName = req.body.newUserName;
+	User.findOne({ username : req.user.username }, (err, user) => {
+		if(err)
+			res.json({ error : err });
+		else if( user == null )
+			res.json({ msg : "user not found " });
+		else {
+			user.contactlists.push(newUserName);
+			user.save((err, data) => {
+				if(!err)
+					res.json({
+ 						status : "success",
+						data : data
+ 					});
+				else
+					res.json({
+ 						error: err
+ 					});
+			})
+		}
+	})
+});
 
-// 	Book.findOne({ _id: id }, (err, book) => {
-// 		if(err)
-// 			res.json({
-// 				error :  err
-// 			});
-// 		else if(book == null)
-// 				res.json({
-// 					msg : "Document not found"
-// 				});
-// 		else{
-// 			book.reviews.push(review_data);
-// 			var rating = 0;
-// 			for(var i = 0; i < book.reviews.length; i++){
-// 				rating += book.reviews[i].rate;
-// 			}
+router.get('/getContacts', (req, res) =>  {
+	User.find({ username : req.user.username }, 
+			{ username: true, fullname: true, _id: false } , (err, data) => {
+		if(!err){
+			res.json({
+				status : "success",
+				data : data
+			})	
+		}
+		else
+			res.json({
+				error : err
+			});
+	});
+});
 
-// 			Book.update({_id: book._id},{ $set :{ average_rate : ((rating/book.reviews.length).toFixed(2))*100 }}, (err, data) => {
-// 				if(!err)
-// 					console.log("Rating Updated")
-// 				else
-// 					console.log(err);
-// 			});
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
 
-// 			book.save((err, data) => {
-// 				if(!err){
-// 					res.json({
-// 						status : "success",
-// 						data : data
-// 					});
-// 				}	
-// 				else
-// 					res.json({
-// 					error: err
-// 				});
-// 			});
-// 		}	
-// 	});		
+    res.redirect('/signup');
+}
 
-// });
-
-
-// router.put('/updatebook/:id', (req, res) => {
-// 	var book_data = {
-// 		title   : req.body.book_title,
-// 		author  : req.body.book_author,
-// 		isbn	: req.body.book_isbn,
-// 		price	: (parseFloat(req.body.book_price)).toFixed(2) * 100
-// 		//average_rate	: req.body.book_rating
-// 	};
-// 	var id = req.params.id;
-
-// 	Book.update({ _id: id }, { $set : book_data }, (err, data) => {
-// 		if(!err)
-// 			res.json({
-// 				status : "success",
-// 				data : data
-// 			});
-// 		else
-// 			res.json({
-// 				error: err
-// 			});
-// 	});
-// });
-
-// router.delete('/deletebook/:id', (req, res) => {
-// 	var id = req.params.id;
-// 	Book.findOne({ _id: id }, (err, data) => {
-// 		if(err)
-// 			res.json({
-// 				error :  err
-// 			});
-// 		else if(data == null)
-// 			res.json({
-// 				msg : "Document not found"
-// 			});
-// 		else
-// 			Book.remove({ _id: id }, (err, data) => {
-// 				if(err)
-// 					res.json({
-// 						error : err
-// 					})
-// 				else
-// 					res.json({
-// 						status : "success",
-// 						msg : "document deleted successfully"
-// 					});
-// 		});
-
-// 	});
-// });
-	

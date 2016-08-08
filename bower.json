@@ -5,5 +5,10 @@
     "**/.*",
     "node_modules",
     "components"
-  ]
+  ],
+  "dependencies": {
+    "socket.io-client": "~1.4.8",
+    "bootstrap": "~3.3.7",
+    "jquery": "2.0.0"
+  }
 }

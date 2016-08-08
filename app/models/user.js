@@ -8,7 +8,8 @@ var userSchema = new Schema({
 	password : { type: String},
 	email	: { type: String, unique : true, required: true },
 	dob	: {	type: Date, required: true },
-	oauth : []
+	oauth : [],
+	contactlists: [String]
 });
 
 userSchema.plugin(passportLocalMongoose);

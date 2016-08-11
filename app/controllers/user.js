@@ -6,6 +6,9 @@ var template = require('marko').load(require.resolve('./../views/chat.marko'));
 var test = require('marko').load(require.resolve('./../views/test.marko'));
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
+var fs = require('fs');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 module.exports = function (app) {
 	app.use('/', router);
@@ -13,10 +16,6 @@ module.exports = function (app) {
 
 router.get('/', function (req, res) {
     res.redirect('/signup');
-});
-
-router.get('/test', function (req, res) {
-    test.render({}, res);
 });
 
 router.get('/signup', function(req, res) {
@@ -51,7 +50,7 @@ router.get('/webchat', isLoggedIn ,function (req, res, next) {
   });
 });
 
-router.post('/register', (req, res) => {
+router.post('/register',multipartMiddleware,(req, res) => {
 	var user_data = {
 		fullname   : req.body.fullname,
 		username  : req.body.username,
@@ -64,27 +63,37 @@ router.post('/register', (req, res) => {
 			templateSignup.render({ error: err , user : data}, res);
 		}	
 		passport.authenticate('local')(req, res, function () {
-            res.redirect('/webchat');
-        })
+	           res.redirect('/webchat');
+	       })
 	});
 });
    
 router.get('/searchContacts', (req, res) =>  {
 	var value = req.query.srcInput;
-	console.log("value"+ value);
-	User.find({ fullname : { $regex : new RegExp(value+'*.', "i") } }, 
-			{ username: true, fullname: true, _id: false } , (err, data) => {
-		if(!err){
-			res.json({
-				status : "success",
-				data : data
-			})	
-		}
-		else
-			res.json({
+	User.find({ username : req.user.username }, { contactlists: true, _id: false } , (err, users) => {
+    	if(!err){
+    		var contactlists = users[0].contactlists;
+    			contactlists.push(req.user.username);
+    		User.find({ 
+    			username : { $nin : contactlists }, 
+    			fullname : { $regex : new RegExp(value+'*.', "i") }
+    		  },{ username: true, fullname: true, _id: false }, function(err, searchlists ) {
+	        	if(!err)
+	          		res.json({
+					status : "success",
+					data : searchlists
+				})
+	        	else
+		          	res.json({
+					error : err
+				});
+      		})
+    	}else
+      		res.json({
 				error : err
 			});
-	});
+  	});
+
 });
 
 router.post('/addContact', (req, res) =>  {
@@ -134,4 +143,31 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/signup');
 }
+
+router.post('/uploadProfilePic', (req, res) => {
+
+	fs.readFile(req.files.image.path, function (err, data) {
+    var imageName = req.files.image.name;
+    if(!imageName)
+      	res.json({
+        	error : " Not a image"
+        })
+    else {
+      	var path  = __dirname.split('/');
+	  		path.pop(); path.pop();
+      	var newPath = path.join('/') + "/public/img/profiles/" + id + ".png";	
+      	fs.writeFile(newPath, data, function (err) {
+        	if(!err)
+        		res.json({
+        		status : "sucess"
+        	})
+        	else
+        		res.json({
+        		error : err
+        	})
+      })
+    }
+  })
+});
+
 

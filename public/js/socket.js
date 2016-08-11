@@ -7,33 +7,38 @@ function init() {
 
   socket.on('connect', function () {
     console.log("new connect");
-    socket.emit('new user', { username: $("#userInfo").attr('rel'), name: $("#userInfo").text() });
+    socket.emit('new user', { username: $("#userName").attr('rel'), name: $("#userName").text() });
   });
-
 
   socket.on('new connection', function (data) {
     console.log("new connection"+ data);
     $.each(data.participants, function(){
         console.log("new connection user name: "+ this.username);
-        $("#participants ul #"+this.username).removeClass('offlineText');
+        $("#participants ul #"+this.username+" #status-online").removeClass("display-none");
+        $("#participants ul #"+this.username+" #status-offline").addClass("display-none");
     });
   });
 
   socket.on('user disconnected', function(data) {
     console.log("user disconnected " + data.username);
-    $("#participants ul #"+data.username).addClass('offlineText');
+    $("#participants ul #"+data.username+" #status-online").addClass("display-none");
+    $("#participants ul #"+data.username+" #status-offline").removeClass("display-none");
+    //console.log("#participants ul #"+this.username+" i");
   });
 
-  socket.on('new message', function (data) {
-    var message = data.message;
-    var name = data.name;
-    var recieverID = data.recieverID;
-    console.log("senderID:"+recieverID);
-    if($('#participantName').attr('rel') == recieverID){
-      $('#messages>span').append('<b>' + name + '</b><br />' + message +'<br />');
+  socket.on('new message', function (message) {
+    var data =  {
+          msg : message.msg,
+          senderid : message.recieverid
+       }
+    console.log("senderID:"+message.recieverid);
+    if($('#participantName').attr('rel') == message.recieverid){
+      $('#messages #chatLog ul').append(printMessage('right', data));
     }else{
-      $("#participants>ul>#"+ recieverID).addClass("active");
-      console.log("active :"+ $("#participants "+ recieverID));
+      var chatAlertElement = $('#participants ul #'+data.senderid+' .chat-alert');
+      chatAlertElement.addClass("label-danger");
+      var unreadCount = parseInt(chatAlertElement.text());
+      chatAlertElement.text((isNaN(unreadCount) ? 0 : unreadCount) + 1);
     }
   });
 
@@ -42,19 +47,21 @@ function init() {
   });
 
   function sendMessage() {
-    var outgoingMessage = $('#outgoingMessage').val();
-    var name = $("#userInfo").text();
-    var senderID = $('#userInfo').attr('rel');
+    var data ={
+      msg : $('#outgoingMessage').val(),
+      name : $("#userName").text(),
+      senderid : $('#userName').attr('rel')
+    }
     socket.emit('send message', { 
-      message: outgoingMessage ,  
-      name: name ,
-      senderID: senderID, 
+      message: data.msg ,  
+      name: data.name ,
+      senderid: data.senderid, 
       participant: {
-        participantID: participantID , 
+        participantid: participantID , 
         participantName: participantName 
       } 
     });
-    $('#messages>span').append('<b>' + name + '</b><br />' + outgoingMessage +'<br />');
+    $('#messages #chatLog ul').append(printMessage('left', data));
     $('#outgoingMessage').val('');
   }
 
@@ -82,8 +89,12 @@ function init() {
   function populateChatWindow() {
     participantID = $(this).attr('id');
     participantName = $(this).text();
-    $("#participants>ul>#"+ participantID).removeClass("active");
-    var senderID = $('#userInfo').attr('rel');
+    $('#participants ul .active').removeClass('active');
+    $(this).addClass('active');
+    var chatAlertElement = $('#participants ul #'+participantID+' .chat-alert');
+    chatAlertElement.removeClass("label-danger");
+    chatAlertElement.text('');
+    var senderID = $('#userName').attr('rel');
     if(participantID != ''){
     $.ajax({
           type: 'GET',
@@ -92,18 +103,15 @@ function init() {
           dataType: 'JSON'
       }).done(function( res ) {
           if (res.status == 'success') {
-            $('#chatWindow').removeClass('postreply');
+            $('#chatWindow').removeClass('display-none');
             $('#participantName').text('');
             $('#participantName').attr('rel', participantID);
-            $('#participantName').text(participantName);
-            $('#messages chatLog').remove();
-            var chatLog = '<span id="chatLog">';
+            $('#participantName .friend-name').text(participantName);
+            $('#messages #chatLog ul li').remove();
             $.each(res.data, function(){
-              chatLog = '<b>' + this.senderid + '</b><br />' + this.msg +'<br />' + chatLog;
+              var side = participantID == this.senderid ? 'left' : 'right';
+              $('#messages #chatLog ul').prepend(printMessage(side, this));
             })
-            chatLog += '</span>';
-            $('#messages').html(chatLog);
-            console.log(res.data);
           }
           else {
               alert('Error: ' + response.msg);
@@ -113,6 +121,17 @@ function init() {
       $('#srcInputError').html('<span>Something went wrong !<span>');
     }
   }
+  function printMessage(side,data){
+    var chatLog = '<li class="'+side+' clearfix"><span class="chat-img pull-'+side+'">';
+        chatLog += '<img alt="User Avatar" src="http://bootdey.com/img/Content/user_1.jpg">';
+        chatLog += '</span><div class="chat-body clearfix"><div class="header">';
+        chatLog += '<strong class="primary-font">' + data.senderid + '</strong><small class="pull-right" text-muted">';
+        chatLog += '<i class="fa fa-clock-o"></i> 13 mins ago</small></div><p>' + data.msg +'</p></div></li>';
+    return chatLog;
+  }
+
+  $("#messages").scroll();
+  $("#participants").scroll();
 
 }
 

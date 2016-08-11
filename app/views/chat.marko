@@ -5,58 +5,112 @@
         <link rel='stylesheet' href='/css/style.css'/>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans" />
         <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css" />
+        <link href="/components/font-awesome/css/font-awesome.min.css"
+        rel="stylesheet">
     </head>    
     <body>  
-        <h3>E-Chatroom</h3>
-        <div class="container">
+        <div class="container bootstrap snippet" style="padding-top:10px;">
             <div class="row">
-                <div if(data.user)><h5><span id="userInfo" rel="${data.user.username}">${data.user.fullname}</span></h5></div>
-                <div if(data.user)><span><a href="/logout"> Logout </a></span></div>
-                <div class="row">
-                    <div class="col-md-3"><!--well-->
-                         <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search Friends..">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="searchBtn" >Go!</button>
-                            </span>
+                <div class="col-md-4">
+                    <div class="row" if(data.user)>
+                        <div class="col-md-5">
+                            <div class="user-profile">    
+                                <img alt="" class="img-circle" src="http://bootdey.com/img/Content/user_1.jpg">
+                            </div>
                         </div>
-                        <br/>
-                        <div id="srcContactLists" class="postreply">
-                        </div>
-                        <div id="srcInputError">${data.error}</div>
-                        <div id="participants">
-                            <ul class="nav " for(contact in data.contactlists)>
-                                <li id="${contact.username}" class="offlineText">
-                                    <a href="#">${contact.fullname}</a>
-                                </li>
-                            </ul>
-                        </div> 
-                   </div>
-                    <div class="col-md-6 postreply" id="chatWindow">
-                        <div class="jumbotron">
-                            <div id="participantName"></div>
-                            <hr/>
-                            <div id="messages"><span id="chatLog"></span></div>
-                            <form id="messageForm" style='max-width: 300px;'>
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="4" cols="50" placeholder="Message" maxlength=200 id="outgoingMessage"/>
-                                </div>
-                                <button class="btn btn-primary" type="button" id="send"> Share</button>
-                            </form> 
-                        </div>
+                        <div class="col-md-7"> 
+                            <div class="">   
+                                <span id="userName" rel="${data.user.username}" style="font-weight: 700;">
+                                    ${data.user.fullname}
+                                </span><br/>    
+                                <span if(data.user)> <a href="/edit"> Edit Profile </a> </span><br/>    
+                                <span if(data.user)> <a href="/logout"> Logout </a> </span>
+                            </div>    
+                        </div>               
                     </div>
-                    <div class="col-md-6 postreply" id="addContactWindow">
-                        <div class="jumbotron">
-                            <div id="addContactName"></div>
-                            &nbsp;
-                            <form id="addContactForm" style='max-width: 300px;'>
-                                <button class="btn btn-primary" type="button" id="add"> Add </button>
-                                &nbsp;
-                                <button class="btn btn-default" type="button" id="addCancel"> Cancel </button>
-                            </form> 
-                        </div>
-                    </div>        
                 </div>
+                <div class="col-md-8">
+                    <span style="text-align: center;"><h4>E-Chatroom</h4></span>
+                </div>     
+            </div>
+            <hr/>    
+            <div class="row">  
+                    <!-- div if(data.user)><h5><span id="userInfo" rel="${data.user.username}">${data.user.fullname}
+                    </span></h5></div> -->
+                <div class="col-md-4 bg-white">
+                     <div class="input-group display-none">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search Friends..">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="searchBtn" >Go!</button>
+                        </span>
+                    </div>
+                    <br/>
+                    <div id="srcInputError">${data.error}</div>
+                    <div id="srcContactLists" class="display-none">
+                        <ul class="friend-list"> Search
+                        </ul>
+                    </div>
+                    <div id="participants" style="height:500px;overflow:scroll;">
+                        <ul class="friend-list" for(contact in data.contactlists) >
+                            <li id="${contact.username}" class="bounceInDown ">
+                                <a class="clearfix" href="#">
+                                    <img alt="" 
+                                    class="img-circle" 
+                                    src="http://bootdey.com/img/Content/user_1.jpg"
+                                    >
+                                    <div class="friend-name">
+                                        <strong>${contact.fullname}</strong>
+                                    </div>
+                                    <div class="status" id="status-offline">
+                                        <i class="fa fa-circle offline"></i> offline
+                                    </div>
+                                    <div class="status display-none" id="status-online">
+                                        <i class="fa fa-circle online"></i> online
+                                    </div>
+                                    <small class="chat-alert label"></small>   
+                                    <!-- <div class="last-message text-muted">
+                                        Last Message
+                                    </div>
+                                    <small class="time text-muted">Just now</small> 
+                                    <small class="chat-alert label"></small> -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>    
+               </div>
+               <div class="col-md-8  display-none" id="addContactWindow">
+                    <div id="addContactName">
+                        <ul class="friend-list">
+                            <li class="bounceInDown">
+                                <a class="clearfix" href="#"><img alt="" class="img-circle" src="http://bootdey.com/img/Content/user_1.jpg">
+                                    <div class="friend-name"><strong></strong></div> 
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    &nbsp;
+                    <form id="addContactForm" style='max-width: 300px;'>
+                        <button class="btn btn-primary" type="button" id="add"> Add </button>
+                        &nbsp;
+                        <button class="btn btn-default" type="button" id="addCancel"> Cancel </button>
+                    </form> 
+                </div>
+                <div class="col-md-8 bg-white display-none" id="chatWindow">
+                    <div id="participantName"></div>
+                    <div id="messages" class="chat-message" style="height:500px;overflow:scroll;">
+                        <div id="chatLog">
+                            <ul class="chat"></ul>
+                        </div>   
+                    </div>
+                    <div id="form" class="col-md-12 chat-message">
+                        <form id="messageForm">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="2" cols="40" placeholder="Message" maxlength=200 id="outgoingMessage"/>
+                            </div>
+                            <button class="btn btn-primary" type="button" id="send"> Send </button>
+                        </form> 
+                    </div> 
+                </div>        
             </div>    
         </div>
         <script src="/components/socket.io-client/socket.io.js"></script>

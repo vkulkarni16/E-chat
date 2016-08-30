@@ -7,24 +7,32 @@ function init() {
 
   socket.on('connect', function () {
     console.log("new connect");
-    socket.emit('new user', { username: $("#userName").attr('rel'), name: $("#userName").text() });
+    socket.emit('new user', { id: $("#userName").attr('rel'), name: $("#userName").text() });
   });
 
   socket.on('new connection', function (data) {
     console.log("new connection"+ data);
     $.each(data.participants, function(){
-        console.log("new connection user name: "+ this.username);
-        $("#participants ul #"+this.username+" #status-online").removeClass("display-none");
-        $("#participants ul #"+this.username+" #status-offline").addClass("display-none");
+        console.log("new connection user name: "+ this.id);
+        $("#participants ul #"+this.id+" #status-online").removeClass("display-none");
+        $("#participants ul #"+this.id+" #status-offline").addClass("display-none");
     });
   });
 
   socket.on('user disconnected', function(data) {
-    console.log("user disconnected " + data.username);
-    $("#participants ul #"+data.username+" #status-online").addClass("display-none");
-    $("#participants ul #"+data.username+" #status-offline").removeClass("display-none");
+    console.log("user disconnected " + data.id);
+    $("#participants ul #"+data.id+" #status-online").addClass("display-none");
+    $("#participants ul #"+data.id+" #status-offline").removeClass("display-none");
     //console.log("#participants ul #"+this.username+" i");
   });
+
+  socket.on('new request', function(data){
+    console.log("new request arrived: "+ data.ncid);
+  })
+
+  socket.on('new contact', function(data){
+    console.log("new contact: "+ data.ncid);
+  })
 
   socket.on('new message', function (message) {
     var data =  {
@@ -45,6 +53,25 @@ function init() {
   socket.on('error', function (reason) {
     console.log('Unable to connect to server', reason);
   });
+
+  function sendRequest() {
+  var nrid = $('#addContactForm #newUserId').val();
+  if(nrid != ''){
+      socket.emit('send request', { 
+        nrid: nrid,
+        senderid: $('#userName').attr('rel')  
+      });
+  }
+ }
+
+ function approveRequest(){
+  if(nrid != ''){
+      socket.emit('approve request', { 
+        nrid: nrid,
+        senderid: $('#userName').attr('rel')  
+      });
+  }
+ }
 
   function sendMessage() {
     var data ={
@@ -85,6 +112,8 @@ function init() {
   $('#outgoingMessage').on('keyup', outgoingMessageKeyUp);
   $('#send').on('click', sendMessage);
   $('#participants').on('click','li', populateChatWindow);
+  $('#add').on('click', sendRequest);
+  $('#approve').on('click', approveRequest);
 
   function populateChatWindow() {
     participantID = $(this).attr('id');
@@ -123,7 +152,11 @@ function init() {
   }
   function printMessage(side,data){
     var chatLog = '<li class="'+side+' clearfix"><span class="chat-img pull-'+side+'">';
-        chatLog += '<img alt="User Avatar" src="http://bootdey.com/img/Content/user_1.jpg">';
+        if(data.isProfilepicpath)
+          chatLog += '<img alt="User Avatar" src="/img/profiles/'+ data.senderid +'.jpg">';
+        else
+           chatLog += '<img alt="User Avatar" src="http://bootdey.com/img/Content/user_1.jpg">';
+
         chatLog += '</span><div class="chat-body clearfix"><div class="header">';
         chatLog += '<strong class="primary-font">' + data.senderid + '</strong><small class="pull-right" text-muted">';
         chatLog += '<i class="fa fa-clock-o"></i> 13 mins ago</small></div><p>' + data.msg +'</p></div></li>';

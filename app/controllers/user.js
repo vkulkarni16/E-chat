@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var templateSignup = require('marko').load(require.resolve('./../views/signup.marko'));
 var template = require('marko').load(require.resolve('./../views/chat.marko'));
-var test = require('marko').load(require.resolve('./../views/test.marko'));
+var index = require('marko').load(require.resolve('./../views/index.marko'));
 var mongoose = require('mongoose'),
     User = mongoose.model('User');
 var fs = require('fs');
@@ -16,6 +16,10 @@ module.exports = function (app) {
 
 router.get('/', function (req, res) {
     res.redirect('/signup');
+});
+
+router.get('/index', function (req, res) {
+    index.render({}, res);
 });
 
 router.get('/signup', function(req, res) {
@@ -36,21 +40,31 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/webchat', isLoggedIn ,function (req, res, next) {
-  User.find({ username : req.user.username }, 
-    { contactlists: true, _id: false } , (err, users) => {
-    if(!err)
-      User.find({ username : { "$in" : users[0].contactlists } }, (err, contactlists ) => {
-        if(!err)
-          template.render({ user : req.user , contactlists : contactlists }, res);
-        else
-          template.render({ user : req.user , error: err }, res);
-      })
-    else
-      template.render({ user : req.user , error: err }, res);
-  });
-});
+  User.find({ _id : req.user._id }, 
+    { contactlists: true, pendinglists : true, _id: false } , (err, users) => {
+    	if(!err)
+    		getUsersList(users[0].contactlists, function(err, contactlists){
+    		if(!err)
+    			getUsersList(users[0].pendinglists, function(err, pendinglists){
+    				template.render({ user : req.user , 
+    					contactlists : contactlists, 
+    					pendinglists : pendinglists }, res);
+    			})
+    		else
+    			template.render({ user : req.user , error: err }, res);
+    		})
+    	else
+    		template.render({ user : req.user , error: err }, res);
+  	})
+})
 
-router.post('/register',multipartMiddleware,(req, res) => {
+function getUsersList(lists, next){
+	User.find({ _id : { "$in" : lists } }, function (err, userLists ) {
+		next(err, userLists);
+    })
+}
+
+router.post('/register',(req, res) => {
 	var user_data = {
 		fullname   : req.body.fullname,
 		username  : req.body.username,
@@ -61,7 +75,7 @@ router.post('/register',multipartMiddleware,(req, res) => {
 	User.register(new User(user_data), req.body.password, (err, data) => {
 		if(err){
 			templateSignup.render({ error: err , user : data}, res);
-		}	
+		}
 		passport.authenticate('local')(req, res, function () {
 	           res.redirect('/webchat');
 	       })
@@ -70,14 +84,14 @@ router.post('/register',multipartMiddleware,(req, res) => {
    
 router.get('/searchContacts', (req, res) =>  {
 	var value = req.query.srcInput;
-	User.find({ username : req.user.username }, { contactlists: true, _id: false } , (err, users) => {
+	User.find({ _id : req.user._id }, { contactlists: true, _id: false } , (err, users) => {
     	if(!err){
     		var contactlists = users[0].contactlists;
-    			contactlists.push(req.user.username);
+    			contactlists.push(req.user._id);
     		User.find({ 
-    			username : { $nin : contactlists }, 
+    			_id : { $nin : contactlists }, 
     			fullname : { $regex : new RegExp(value+'*.', "i") }
-    		  },{ username: true, fullname: true, _id: false }, function(err, searchlists ) {
+    		  },{ username: true, fullname: true, _id: true }, function(err, searchlists ) {
 	        	if(!err)
 	          		res.json({
 					status : "success",
@@ -97,32 +111,65 @@ router.get('/searchContacts', (req, res) =>  {
 });
 
 router.post('/addContact', (req, res) =>  {
-	var newUserName = req.body.newUserName;
-	User.findOne({ username : req.user.username }, (err, user) => {
+	var newUserId = req.body.newUserId;
+	User.findOne({ _id : newUserId }, (err, user) => {
 		if(err)
-			res.json({ error : err });
+			template.render({ user : req.user , error: err }, res)
 		else if( user == null )
-			res.json({ msg : "user not found " });
+			template.render({ user : req.user , msg: " User not found. Please resend the request" }, res);
 		else {
-			user.contactlists.push(newUserName);
-			user.save((err, data) => {
-				if(!err)
-					res.json({
- 						status : "success",
-						data : data
- 					});
-				else
-					res.json({
- 						error: err
- 					});
-			})
+			// Check contact allready exists in pendinglists
+			if(isContactExists(user.pendinglists, req.user._id) == -1 ){
+				// Add contact in pendinglists 
+				user.pendinglists.push(req.user._id);
+				// Update the user
+				user.save((err, data) => {
+					if(!err)
+						res.redirect('/webchat');
+					else
+						template.render({ user : req.user , error: err }, res);
+				})
+			}else
+				template.render({ user : req.user , msg: " Request allready sent.. waiting for approval" }, res);
 		}
 	})
 });
 
+router.post('/approveContact', (req, res) =>  {
+	var newUserId = req.body.newUserId;
+	User.findOne({ _id : req.user._id }, (err, user) => {
+		if(err)
+			template.render({ user : req.user , error: err }, res);
+		else if( user == null )
+			template.render({ user : req.user , error: "User not found" }, res);
+		else {
+			// Check user allready exists in contactlists
+			if(isContactExists(user.contactlists, newUserId) == -1)			
+				user.contactlists.push(newUserId);
+
+			// Check user allready exists in pendinglists
+			var arrayIndex = isContactExists(user.pendinglists, newUserId );
+	      	if(arrayIndex != -1){
+	      		//Remove user from pendinglist
+	        	user.pendinglists.splice(arrayIndex, 1);
+	        	//update the user		
+				user.save((err, data) => {
+					if(!err){
+
+						updateContactList(req, newUserId);
+						res.redirect('/webchat');
+					}else
+						template.render({ user : req.user , error: err }, res);
+					})
+				} else
+					template.render({ user : req.user , error: err }, res);
+		}	
+	})
+});
+
 router.get('/getContacts', (req, res) =>  {
-	User.find({ username : req.user.username }, 
-			{ username: true, fullname: true, _id: false } , (err, data) => {
+	User.find({ _id : req.user._id }, 
+			{ _id: true, fullname: true } , (err, data) => {
 		if(!err){
 			res.json({
 				status : "success",
@@ -144,30 +191,66 @@ function isLoggedIn(req, res, next) {
     res.redirect('/signup');
 }
 
-router.post('/uploadProfilePic', (req, res) => {
+function updateProfilepicpath(req){
+	User.update({ _id: req.user._id },{ $set : { isProfilepicpath : true } }, function(err, data){
+		if(!err)
+			console.log("Profilepicpath updated");
+	})
 
+}
+
+function updateContactList(req, newUserId){
+	User.findOne({ _id : newUserId}, function( err, user){
+		if(!err){
+			if(isContactExists(user.contactlists, req.user._id) == -1){
+				user.contactlists.push(req.user._id);
+				user.save( function( err, data){
+					if(!err)
+						console.log(" Approved");
+					else
+						console.log(" Error : " + err);
+				})
+			}else {
+				console.log("Contact allready exists ");
+			}	
+		}	
+	})
+}
+
+function isContactExists(array, id){
+	return array.indexOf(id);
+}
+
+router.post('/uploadProfilePic', multipartMiddleware, (req, res) => {
 	fs.readFile(req.files.image.path, function (err, data) {
-    var imageName = req.files.image.name;
-    if(!imageName)
-      	res.json({
-        	error : " Not a image"
-        })
-    else {
-      	var path  = __dirname.split('/');
-	  		path.pop(); path.pop();
-      	var newPath = path.join('/') + "/public/img/profiles/" + id + ".png";	
-      	fs.writeFile(newPath, data, function (err) {
-        	if(!err)
-        		res.json({
-        		status : "sucess"
-        	})
-        	else
-        		res.json({
-        		error : err
-        	})
-      })
-    }
-  })
+	    if(!req.files.image.name)
+	      	res.json({
+	        	error : " Not a image"
+	        })
+	    else {
+	      	var path  = __dirname.split('/');
+		  		path.pop(); 
+		  		path.pop();
+	      	var newPath = path.join('/') + "/public/img/profiles/" + req.user._id  + ".png";	
+	      	fs.writeFile(newPath, data, function (err) {
+		  		if(!err){
+		  			console.log("File Saved");
+		  			updateProfilepicpath(req);
+		  			res.json({
+		  				id: req.user._id,
+		  				status: "success"
+		  			})		
+		  		}else{
+		  			console.log("Profile pic upload error: "+ err);
+		  			res.json({
+		  				error: err
+		  			})
+		  		}	
+	        })
+	    }
+  	})
 });
+
+
 
 

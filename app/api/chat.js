@@ -17,8 +17,8 @@ function recordChat(data, next){
 }
 
 function getChatHistory(req, res, next){
-    var query = ChatHistory.find({ senderid : { $in : [ req.user.username, req.query.receiverid ] }, 
-                receiverid : { $in : [ req.query.receiverid, req.user.username ] } } )
+    var query = ChatHistory.find({ senderid : { $in : [ req.user._id, req.query.receiverid ] }, 
+                receiverid : { $in : [ req.query.receiverid, req.user._id ] } } )
                 .sort({'loggeddate': -1})
                 .limit(10);
 

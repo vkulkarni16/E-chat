@@ -8,17 +8,881 @@
        
     </head>    
     <body>
-        <div if(!data.user)>
-            <a href="/login">Login</a>
-            <br/>
-            <a href="register">Register</a>
+        <div class="main-container" id="homeBanner"> 
+        <!--Header starts here -->
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid primary-nav">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+                            <span class="sr-only">Toggle navigation</span> 
+                            <span class="icon-bar"></span> 
+                            <span class="icon-bar"></span> 
+                            <span class="icon-bar"></span> 
+                        </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/home/etouch-logo.png" alt="eTouch Systems" class="img-responsive">
+                        <div class="clearfix"></div>
+                    </a> 
+                </div>
+                <div class="collapse navbar-collapse top-nav navbar-right" id="bs-example-navbar-collapse-1">
+                    <div class="top-slide-menu navbar-left" style="right: 0px;">
+                        <ul class="nav navbar-nav">
+                            <li class="" data-rel="home">
+                                <a href="index.html" style="background: none;">
+                                    Home 
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+        <li class="dropdown" data-rel="services"> <a href="#nogo" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: none;">Services <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="services/index.html">Overview</a></li>
+        <li><a href="services/accelerators.html">Accelerators</a></li>
+        </ul>
+        </li>
+        <li class="dropdown active" data-rel="customers"><a href="#nogo" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: none;">Customers <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="customers/index.html">Overview</a></li>
+        <li><a href="index.html">Case Studies</a></li>
+        </ul>
+        </li>
+
+        <li class="dropdown" data-rel="Product"><a href="#nogo" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: none;">Product <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="products/samepage/index.html" target="_blank">SamePage - An Enterprise Wiki</a></li>
+        </ul>
+        </li>
+        <li class="dropdown" data-rel="Aboutus"><a href="#nogo" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: none;">About Us <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="about-us/index.html">Overview</a></li>
+        <li><a href="about-us/management.html">Leadership</a></li>
+        <li><a href="about-us/partners.html">Alliances</a></li>
+        <li><a href="about-us/contact-us.html">Contact Us</a></li>
+        </ul>
+        </li>
+        <li class="dropdown" data-rel="Careers"><a href="#nogo" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background: none;">Careers <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li><a href="careers/index.html">Overview</a></li>
+        <li><a href="http://etouch.catsone.com/careers/index.php" target="_blank">More Job Postings</a></li>
+        </ul>
+        </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+        <!--<input type="text" class="form-control" placeholder="Search">--> 
+        <!-- Place this tag where you want the search box to render -->
+        <div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box " id="gsc-iw-id1"><table cellspacing="0" cellpadding="0" id="gs_id50" class="gstl_50 " style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id1" dir="ltr" spellcheck="false" style="width: 100%; padding: 0px; border: none; margin: -0.0625em 0px 0px; height: 1.25em; outline: none;"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;"><span class="gscb_a" id="gs_cb50">×</span></a></div></td></tr></tbody></table></div><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="image" src="https://www.google.com/uds/css/v2/search_box_icon.png" class="gsc-search-button gsc-search-button-v2" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="https://www.google.com/uds/css/small-logo.png" class="gsc-branding-img"></td></tr></tbody></table></form></div></div>
+        <!-- <button type="submit" class="btn btn-default search-icon-btn">Submit</button>-->
+        </form>
         </div>
-        <div else>
-            <p> You are currently logged in as ${data.user.fullname} </p>
-            <a href="/logout"> Logout </a>
+        <div class="nav-button navbar-left"><span class="sr-lines-rotate"></span></div>
         </div>
-    
-    	<script language='JavaScript' type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
-        <script language='JavaScript' type="text/javascript" src='/components/bootstrap/dist/js/bootstrap.min.js'></script>
+        </div>
+        </nav>
+        </header>
+        <!--Header ends here -->
+        <div class="clearfix"></div>
+
+        <!--Content Container starts here -->
+        <div class="content-container">
+        <section id="slides" style="position: relative; overflow: hidden; width: 100%; height: 233px; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none;">
+        <div class="slides-control" style="position: relative; height: 100%; width: 3795px; left: -1265px;"><div class="slides-container" style="margin: 0px; padding: 0px; list-style: none; position: relative; height: 100%; display: block;">
+        <div id="home" class="home-bg-img delay" data-rel-menu="home" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="cloud-container">
+        <div class="swing1">
+        <div class="cloud-img cl1"></div>
+        </div>
+        <div class="swing2">
+        <div class="cloud-img cl2"></div>
+        </div>
+        <div class="swing3">
+        <div class="cloud-img cl3"></div>
+        </div>
+        <div class="swing4">
+        <div class="cloud-img cl4"></div>
+        </div>
+        <div class="swing5">
+        <div class="cloud-img cl5 hover"></div>
+        </div>
+        <div class="swing6">
+        <div class="cloud-img cl6"></div>
+        </div>
+        <div class="swing7">
+        <div class="cloud-img cl7"></div>
+        </div>
+        <div class="swing8">
+        <div class="cloud-img cl8"></div>
+        </div>
+        <div class="swing9">
+        <div class="cloud-img cl9"></div>
+        </div>
+        <div class="swing10">
+        <div class="cloud-img cl10"></div>
+        </div>
+        </div>
+        <div class="container banner-title-h1">
+        <h1 class="title">Engineering<br>
+        the Digital Enterprise</h1>
+        </div>
+        </div>
+        <div id="cs1" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div class=""> Search engine implementation and enterprise application integration for leading virtualization software firm</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs2" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Mobile app development platform and portal for global telco alliance</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs3" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Migration of web content and digital assets for a hi-tech networking solutions and services giant</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs4" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <video id="homepage-hero-video_html5_api" class="vjs-tech" preload="auto" loop="" width="100%" height="100%" poster="images/home/banner-4.jpg">
+        <source type="video/webm" src="media/LegacyModernization.webm">
+        <source type="video/mp4" src="media/LegacyModernization.mp4">
+        </video>
+
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Productivity and scalability for a hi-tech giant's network planning and management processes</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs5" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Next generation digital marketing platform for a global finance and accounting solutions firm</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs6" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>An end-to-end solution for all public and enterprise web applications of a leading space agency</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs7" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-9 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Leveraging the legacy platform to unlock the value of stakeholder collaboration for a machine data analytics product company</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs8" class="home-bg-img delay" data-rel-menu="customers" style="display: none; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 0;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>A digital marketing solution for one of the world's largest online advertising companies</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div id="cs9" class="home-bg-img delay" data-rel-menu="customers" style="display: block; left: 1265px; position: absolute; overflow: hidden; height: 100%; width: 1265px; top: 0px; z-index: 2;">
+        <div class="banner-gradient">
+        <div class="container banner-inner-cnt">
+        <div class="row">
+        <div class="col-md-3 col-md-push-9 col-sm-3 col-sm-push-9">
+        <div class="right-side-img white-img"></div>
+        </div>
+        <div class="col-md-8 col-md-pull-3 col-sm-8 col-sm-pull-3">
+        <div>Digital test engineering for one of the world's largest web search companies</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div></div>
+        <div class="container nav-btn-cnt">
+        <div class="slides-navigation"><a href="#" class="prev" style="visibility: visible;"></a><a href="#" class="next"></a></div>
+        </div>
+        <nav class="slides-pagination"><a href="#home" class="">home</a><a href="#cs1" class="">cs1</a><a href="#cs2" class="">cs2</a><a href="#cs3" class="">cs3</a><a href="#cs4" class="">cs4</a><a href="#cs5" class="">cs5</a><a href="#cs6" class="">cs6</a><a href="#cs7" class="">cs7</a><a href="#cs8" class="">cs8</a><a href="#cs9" class="current">cs9</a></nav></section>
+        <div id="homeContent" style="display: none;">
+        <section id="services" data-speed="4" data-type="background" class="service-section">
+        <article>
+        <div class="container">
+        <h1 class="heading">Digital Engineering Services</h1>
+        <div class="services-container"> 
+
+        <!-- Carousel starts -->
+        <div class="jcarousel-wrapper">
+        <div class="jcarousel" data-jcarousel="true" data-jcarouselautoscroll="true">
+        <div class="row" style="left: 0px; top: 0px;">
+        <div class="col-md-4 col-lg-4 services-content-col" style="width: 100px;">
+        <div class="digital-web-and-mobile-thumb icons-list"></div>
+        <h4 class="heading">Digital Web and Mobile</h4>
+        <p>Enterprises today have several stakeholders — customers, employees, business partners, vendors, management, and citizens. eTouch’s engineering teams understand this ecosystem of collaborators.</p>
+        <span><a href="services/index.html#webAndMobile">Find out more</a></span> </div>
+
+        <div class="col-md-4 col-lg-4 services-content-col" style="width: 100px;">
+        <div class="digital-test-engineering-thumb icons-list"></div>
+        <h4 class="heading">Digital Test Engineering</h4>
+        <p>Our testing approach covers all digital platforms as well as analytics services. We provide specialized services such as test automation, performance testing, security testing, multivariate (A/B) testing, and behaviour driven testing.</p>
+        <span><a href="services/index.html#testEngineering">Find out more</a></span> </div>
+
+        <div class="col-md-4 col-lg-4 services-content-col" style="width: 100px;">
+        <div class="digital-analytics-thumb icons-list"></div>
+        <h4 class="heading">Analytics</h4>
+        <p>The stakeholders of a digital enterprise make important decisions based on the data residing in multiple databases,  and repositories containing structured and unstructured data, which are pruned via multiple business rules.</p>
+        <span><a href="services/index.html#analytics">Find out more</a></span> </div>
+
+        <div class="col-md-4 col-lg-4 services-content-col" style="width: 100px;">
+        <div class="digital-devops-and-cloud-thumb icons-list"></div>
+        <h4 class="heading">Cloud Services</h4>
+        <p>Today’s enterprise lives on private as well as public cloud infrastructures. eTouch’s infrastructure teams have worked on multiple platforms including Amazon Web Services, Microsoft Azure, Google Cloud, Cloud Foundry.</p>
+        <span><a href="services/index.html#DevOps">Find out more</a></span> </div>
+
+        <div class="col-md-4 col-lg-4 services-content-col" style="width: 100px;">
+        <div class="digital-security-thumb icons-list"></div>
+        <h4 class="heading">Security</h4>
+        <p>Our approach always considers the security aspect for our digital solutions. Our services portfolio comprises end to end services - including assessment, architecture, design, implementation, testing and audit.</p>
+        <span><a href="services/index.html#security">Find out more</a></span> </div>
+
+        <div class="col-md-4 col-lg-4 services-content-col digital-marketing-automation-slide-content" style="width: 100px;">
+        <div class="digital-marketing-automation-thumb icons-list"></div>
+        <h4 class="heading">Digital Platform Solutions</h4>
+        <ul>
+            <li><a href="/services/index.html#marketingAutomation">Oracle Marketing Cloud (Digital Marketing)</a></li>
+            <li><a href="/services/index.html#contentManagementSystemAEM">Adobe Experience Manager (CMS)</a></li>
+            <li><a href="/services/index.html#legacyModernizationIBMAS400">Legacy Modernization – IBM AS/400</a></li>
+        </ul>
+        <!-- <span><a href="services/index.html#marketingAutomation">Find out more</a></span> --> </div>
+        <style type="text/css" style="width: 100px;">
+            .digital-marketing-automation-slide-content {
+                text-align: left;
+            }
+            .digital-marketing-automation-slide-content ul{
+                padding: 0 20px;
+            }
+            .digital-marketing-automation-slide-content li {
+                line-height: normal;
+                margin-bottom: 8px;
+            }
+        </style>
+        </div>
+        </div>
+        <!-- Left and right controls --> 
+        <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true">‹</a> <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a> </div>
+        <!-- Carousel Ends -->
+
+        <div class="clearfix"></div>
+        <div class="separator"></div>
+        </div>
+        </div>
+        </article>
+        </section>
+        <!-- Section #2 --></div>
+
+        <!-- Case Study section starts here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent1" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch enhances the digital presence of a leading virtualization and cloud software provider with a consolidated search engine and integration of enterprise applications</h3>
+        <p>The client is a leading software company that reduces IT infrastructure complexities for its customers by providing virtualization and cloud services. Their technologies and products span the areas of cloud infrastructure, data centers, desktop and application virtualization, networking security, storage availability, enterprise mobility management, and hyper-converged infrastructures.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>The client offers products and services for enterprises as well as end consumers. They cater to business as well as technical audiences looking for production collateral and technical solutions. The client’s website holds a wide range of content, from marketing collateral to technical white papers. They needed to revamp their digital presence with a comprehensive search engine that provided accurate, relevant information. Challenges toward this included:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Multiple product master data residing in multiple systems</span></li>
+        <li><span class="fa fa-angle-right"></span><span>The need for a unified, enterprise-wide information taxonomy</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Limited content metadata</span></li>
+        <li><span class="fa fa-angle-right"></span><span>The need to consolidate multiple search engines</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Lack of a mechanism to leverage social media content and feedback</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Limited faceted navigation capabilities; the client wanted to provide incremental search and browse functionality so users could begin with classic keyword search and then scan the result list</span></li>
+        <li><span class="fa fa-angle-right"></span><span>The need for a unified solution for multiple business units such as marketing and support services</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>Drawing on their expertise in providing innovative, customized solutions, eTouch delivered a master taxonomy for the entire organization that was implemented across multiple systems. These included the client's marketing portal, customer portal, and global support services among others. To ensure users saw relevant content, eTouch added accurate, consistent metadata to the client's content using Natural Language Processing (NLP). They consolidated their search engines and data repositories into one platform — Google Search Appliance (GSA) - for improved search relevance. eTouch streamlined the classification process for over 2 million assets and 100 GB of content including marketing collateral, technical documentation, knowledge management systems, community pages, and data from social media such as Facebook and YouTube. eTouch integrated 10+ enterprise applications including content management, collaboration, forums, knowledge management, social networking, and database applications among others.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>eTouch's understanding of the client’s requirements, and their search enhancement interventions, resulted in the following benefits for the client:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Multiple search applications integrated into a single search engine</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A more meaningful information architecture for increased search efficiency and relevance</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A unified enterprise taxonomy (~600 unique nodes) across multiple applications and business units</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Auto-classification of legacy content (~2 million assets)</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Implementation of SEO best practices</span></li>
+        </ul>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent2" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch helps global telco alliance build a portal for cross-operator, cross-device mobile app development</h3>
+        <p>The client is a not-for-profit global alliance of 24 leading telecom operators, focused on creating a unified, open platform for cross-operator and cross-device mobile application development. Their mission is to build a standard platform for mobile services, create a number of client-powered mobile application storefronts, and unlock the full value of Mobile Network Operators' (MNO) networks.</p>
+        <p>The client had launched a range of tools to encourage innovation among mobile developers globally. These included a common mobile widgets specification; easy-to-use developer kits; and an online repository, distribution, and payment mechanism to help developers roll out their products to customers in 70+ countries across Africa, Asia, Europe, and North America.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>In their effort to help developers build cross-operator, cross-device, mobile application platforms, the client launched a range of mobile services for the developer community. They needed a set of portals that would:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Accelerate the pace of application innovation</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Allow developers across the globe to access developer kits for mobile applications</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Integrate with client-provisioned app stores as well as payment and settlement apps</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Allow developers to more easily monetize applications across platforms and technologies through cross-operator billing services</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Allow mobile operators to administer and provide support services to developers and consumers</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Support multiple languages for app development</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>eTouch developed a multi-locale set of portals including a developer portal, an end-user portal, and an operator portal, based on the open source Liferay portal. These enabled developers to download platform SDKs for developing applications that run on multiple devices &amp; multiple operator networks, uploading these mobile apps across multiple storefronts, and with support for diverse payment applications. In the first year of release, over 30,000 unique visitors downloaded developer kit and developer portal had over 20,000 users with 3000+ mobile apps uploaded.</p>
+        <p>All of the portal's functionalities were accessible from a single interface. eTouch also delivered an end-user portal, an operator admin portal, and a customer service portal to help the developer and consumer communities.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>With eTouch's open source portal solution, the client saw the following benefits:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Reduced costs by 50% for self-service portals</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A single-interface for mobile networks to distribute applications to their app storefronts, and charge users for digital merchandise via their operator bills</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Assured compliance of mobile applications with published standards via rigorous workflows</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Scalability to handle server loads across 70+ countries and 24+ mobile networks</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Increased business momentum, with the portal attracting 40000 developers and 8000 portal widgets</span></li>
+        </ul>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent3" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch enables leading hi-tech company to migrate dispersed, multilingual content to a unified repository for a consistent, enhanced web experience</h3>
+        <p>The client is a global leader in the design and manufacture of IP-based networking products and services that span diverse areas: Switching, next-generation network routing, video delivery, collaboration, data centers, network security, and wireless networks.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>While rebranding their product and service portfolio, and expanding into new market segments, the client wanted to modernize their online presence. This included the need to:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Organize and structure their web content, which was being served from a legacy platform and multiple Content Management Systems</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Migrate over 2 million assets to a robust, integrated platform after cleansing redundant and obsolete data</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Enable multilingual content in over 12 languages with distributed ownership on an integrated web portal</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Classify content into enterprise wide taxonomy</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improve content accessibility and the search experience for visitors</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Offer website visitors a rich online experience with multi-channel support</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>Based on a 13-year relationship, the client chose eTouch as their partner in modernizing their site. Using their established migration framework, eTouch seamlessly migrated the client's over 2 millions assets from their existing Interwoven CMS repository to the new Documentum 5 platform. The client's global marketing website was published in 70 countries in over 12 languages.</p>
+        <p>eTouch designed and proposed a new taxonomy to ensure content classification was in line with the demands of content creators as well as consumers. The existing content was classified in the enterprise wide taxonomy using natural language processing (NLP). eTouch also implemented their new search platform FAST and optimized search relevance by implementing SEO best practices and a unified search strategy across disparate data sources. eTouch enhanced the search experience with guided navigation, contextual and faceted search, advanced multilingual indexing, and rich media indexing.</p>
+        <p>A global team of digital content experts and engineers planned and successfully completed the modernization project over 18 months.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>With an integrated, optimized content management platform, the client saw immediate benefits:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Efficient management of 2+ million assets across 70 global sites</span></li>
+        <li><span class="fa fa-angle-right"></span><span>An enhanced governance model for managing and distributing digital assets</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Classified assets into enterprise wide taxonomy for information architecture and faceted search</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduced labor and TCO for content migration by 60% using content migration platform</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Near zero defects in the final rollout</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="testimonials">
+        <div class="container">
+        <h3 class="heading">Client Testimonials</h3>
+        <p class="client-quote">"Congratulations to everyone in the migration team. What a success story!!!"</p>
+        <p>– IT Director of the client</p>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent4" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch addresses productivity and scalability challenges in hi-tech giant's production network planning and management processes</h3>
+        <p>The client owns and operates some of the world's most popular websites, which are used by more than a billion users worldwide. These websites run on the world's most advanced global network of data centers. The client is viewed as a benchmark of innovation in the digital information space.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>The client had been using a proprietary third-party application for most of their network planning and deployment processes, as well as inventory tracking. They faced multiple issues in using the application efficiently. The data used by the application resided on a myriad of applications and spreadsheets, with a majority on personnel's desktops. Not only did this setup pose a significant security risk, it also was not scalable with respect to the growth of data centers and their assets. Synchronizing data across multiple desktops entailed significant overheads.</p>
+        <p>The client had standardized processes and software for internal engineering functions. Interoperability between network and internal infrastructure was key to the success of a solution that would address these challenges.</p>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>The client chose eTouch to architect and build a solution that would alleviate their issues with the third-party application, and at the same time lay a foundation for the application to keep pace with the growth of their infrastructure. With this mandate, the engineering team from eTouch implemented a solution that seamlessly integrated the third-party application with the client's infrastructure and DevOps processes, provided structured data integration pipelines, and added features that enabled forecasting, planning, and analytics. The application was developed in Python on Google AppEngine. The primary drivers for the choice of programming language were:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Reusability of code, since many of the common functions had already been developed within the organization</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Better integration with the organization's back-office functions</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Availability and scalability characteristics built into the platform</span></li>
+        </ul>
+        <p>Over time, the solution evolved to reduce dependencies on the third-party application. Most of its functions were being served over the client's private cloud infrastructure, which in turn helped reduce costs by leveraging the availability and redundancy SLAs of the private cloud.</p>
+        <p>eTouch continues to be an essential partner of the client's network teams — rolling out new features on a regular basis, and expanding the footprint of the application to other groups in the client's organization.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>With the custom solution from eTouch, the client was able to use a single system to manage network infrastructure, forecast and plan for growth, and receive information abstracted to — and meaningful for — all levels of the organization. Considering the application's architecture, functionalities, and ease of use, the client implemented it across all of their network planning, deployment, and inventory tracking processes.</p>
+        </div>
+        </article>
+        </section>
+        <section id="caseStudyContent5" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch helps global financial and accounting solutions firm create next-generation global SaaS platform and reduce time-to-market</h3>
+        <p>The client is a $4.15 billion global provider of financial, accounting, tax preparation, and online payment solutions. Their products and on-demand banking services are used by small and medium-sized businesses, professionals, mid-market banks, credit unions, and individuals. With their connected services offerings, they have made their products and solutions available across all major digital channels. The client has positively impacted the lives of more than 50 million people.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>The client wanted to revamp their marketing efforts. Toward this, they needed to:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Integrate their existing e-commerce platform with their marketing initiatives. This would empower digital marketers to plan, design, and launch campaigns that drive demand and increase brand engagement across digital channels</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Gain insights into customer behavior and purchase history so marketers could make informed decisions about product offerings. They only had a custom tool with limited capabilities for customer behavior and campaign analytics</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduce delays in launching and managing campaigns. With a single legacy platform for both content and campaign management, and no segregation of roles in content and code creation, marketers had to rely on the web development team to create content and campaigns — which led to delays</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduce development time, and testing delays and defects</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Scale projects and teams as needed</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>eTouch architected a new robust e-commerce platform that could handle a load of millions of visitors per month. It replaced the client's expensive e-commerce solution with an open source platform built on Ruby on Rails. For content and campaign management, eTouch implemented Adobe AEM, which enabled the client's business teams to author their own content and manage their own campaigns. eTouch also integrated SiteSpect for multivariate testing, Ensighten for tag management and Adobe Analytics for web analysis. The platform reduced campaign's TCO by 30-40% and time to market over 50% by providing self services and process governance.</p>
+        <p>eTouch introduced web performance benchmarking to handle payloads across locations. They also introduced an open source testing framework to automate 90% of test cases, along with a multi-variant testing tool to analyze user behavior, conversion patterns, and feedback on web properties.</p>
+        <p>eTouch provided an executive project management dashboard so senior management could visualize and quantify parameters across projects.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>After implementing eTouch's solutions, the client saw immediate benefits:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Migration of the web channel platform to open source technology eliminated product support costs</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Introduction of automated testing tools and automation of regression tests saw shorter testing cycles and improved testing reliability</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduced production defects (by 90%) and multiple "zero priority-one (P1)" defect weeks for all web properties</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Their marketing team responded faster to customer demands, which improved lead generation for the sales team</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduced time-to-market with the Adobe AEM implementation</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved page load times by up to 66%</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Real-time connectivity of projects and resources in real-time with the dashboard solution, which also provided a direct measure of project performance</span></li>
+        </ul>
+        <p>eTouch helped the client establish a Testing Center of Excellence (TCoE) to manage and govern testing tools and processes. The move toward a cohesive online marketing platform with integration of ecommerce and content management solutions was a phenomenal success in the US. This has been replicated in Australia, Canada, India, and the UK.</p>
+        </div>
+        </article>
+        <article class="awards">
+        <div class="container">
+        <h3 class="heading">Conclusion</h3>
+        <p>eTouch's competency in digital engineering helped the client meet their online customers' needs better. The client transformed the way they interacted with their customers and sold their products. Best-in-class web and test engineering services from eTouch enabled them to focus on creating a next-generation online platform for their products and services.</p>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent6" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch designs, develops, manages, and supports all public and internal web applications for space agency</h3>
+        <p>The client is the world's largest aeronautics and space agency, responsible for the civilian space programs as well as aeronautics and aerospace research. The client focuses on areas like aeronautics, human exploration and operations, science to explore the earth, solar system and universe, and space technology. Their strategic goals are:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Expand the frontiers of knowledge, capabilities, and opportunities in space</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improve understanding of the earth and develop technologies to improve the quality of life on our home planet</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Serve the American public and accomplish their mission by effectively managing the people, technical <br>
+        capabilities, and infrastructure</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>Being a civilian agency, the client wanted a powerful way to generate public interest in their endeavors, while being prudent stewards of Federal tax dollars and assets. They needed to revamp their "online presence" to better serve general citizens, and manage their resources and internal communication more efficiently. The objective was to provide an agency-wide capability to create, maintain and manage public web sites and ancillary services. Those services will include content management and delivery, search, support for multimedia, collaborations with blogs and wikis, portals, platform for hosting, etc. The key requirements were:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>A single point of "online" entry for citizens to access public information assets</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Support for millions of concurrent users with 99.995 percent availability and 24x7 support for each day of the entire calendar year </span></li>
+        <li><span class="fa fa-angle-right"></span><span>A seamless IT infrastructure for agency-wide collaboration </span></li>
+        <li><span class="fa fa-angle-right"></span><span>Significant reduction in operating costs and complexity in managing IT services </span></li>
+        <li><span class="fa fa-angle-right"></span><span>An enterprise-wide ontology for their engineering personnel</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Better internal connectivity, and integration of learning repositories to enable efficient communication, collaboration, and knowledge sharing</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A mobile app with full Boolean search for 150,000 images, a full-fledged radio streaming feature, and live streaming of their public TV channel</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A Facebook-like social network for their 80,000 personnel</span></li>
+        <li><span class="fa fa-angle-right"></span><span>An Integrated portal of disparate repositories like CMS's, databases, and file systems</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A hybrid cloud environment to host their intranet, with compliance to security standards including FISMA High/Moderate, SAS 70, FIPS, and FedRAMP</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>eTouch designed and developed the agency's primary public web portal, and integrated the most popular social media and social networking sites into the portal. This involved a cached content delivery network, interventions in operations of two enterprise-scale data centers, implementation of an agency-wide CMS, and full integration of the agency's public content.  eTouch built the platform to meet NASA's SLA requirements like:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Support for 25,000 TPS (Transactions per Second) at the origin servers - The site will utilize a CDN; traffic at the CDN typically is 150,000 TPS for large events. 25,000 TPS flows through to the origin servers</span></li>
+        <li><span class="fa fa-angle-right"></span><span>700K+ web content (pages/files in repository)</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Varying page sizes - For instance the NASA home page is 250 KB (Text/HTML), post Gzip compression it is ~34 KB, associated content for the NASA home page is an additional 2900 KB</span></li>
+        <li><span class="fa fa-angle-right"></span><span>15 Gbps of bandwidth on the CDN end with 3 Gbps flowing to the origin</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Availability requirements:
+        <ul class="solution">
+        <li>99.995% SLA including any planned or unplanned downtime </li>
+        <li>100 % SLA during missions which could be a 36 hour timeframe</li>
+        </ul>
+        </span></li>
+        <li><span class="fa fa-angle-right"></span><span>Availability of content globally within 7 minutes of publication</span></li>
+        <div class="clear">&nbsp;</div>
+        </ul>
+        <p>The platform was based on the below set of technologies.</p>
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+        <th width="34%"></th>
+        <th width="34%">Name of Tool</th>
+        <th width="32%">Name of Vendor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td colspan="3"><b>Content Management</b></td>
+        </tr>
+        <tr>
+        <td>CMS Tools</td>
+        <td>Alfresco Enterprise Edition<br>
+        eTouch CMS<br>
+        Drupal</td>
+        <td>Alfresco Software, Inc.<br>
+        eTouch System Corp<br>
+        Open source community</td>
+        </tr>
+        <tr>
+        <td>Search</td>
+        <td>Google Search Appliance (GSA)<br>
+        Baynote<br>
+        VMIX Online Video Platform<br>
+        SmartLogic</td>
+        <td>Google<br>
+        Baynote<br>
+        VMIX<br>
+        Smartlogic Inc</td>
+        </tr>
+        <tr>
+        <td colspan="3"><b>Collaboration Services</b></td>
+        </tr>
+        <tr>
+        <td>Team Workspace Intranet and Extranet</td>
+        <td>Liferay Portal</td>
+        <td>Liferay</td>
+        </tr>
+        <tr>
+        <td>Shared Calendaring</td>
+        <td>ConnectDaily</td>
+        <td>MH Software, Inc.</td>
+        </tr>
+        <tr>
+        <td>Blogs</td>
+        <td>SamePage<br>
+        WordPress</td>
+        <td>eTouch Systems Corp.<br>
+        WordPress</td>
+        </tr>
+        <tr>
+        <td>Wikis</td>
+        <td>SamePage</td>
+        <td>eTouch Systems Corp.</td>
+        </tr>
+        <tr>
+        <td>Forums</td>
+        <td>JForum</td>
+        <td>JForum</td>
+        </tr>
+        <tr>
+        <td>Feeds/Alerts/Notification</td>
+        <td>GovDelivery<br>
+        ezMLM</td>
+        <td>GovDelivery<br>
+        Open source community</td>
+        </tr>
+        <tr>
+        <td colspan="3"><b>Interactive Content</b></td>
+        </tr>
+        <tr>
+        <td>Polls and Voting</td>
+        <td>Opinio </td>
+        <td>ObjectPlanet, Inc.</td>
+        </tr>
+        <tr>
+        <td>Commenting</td>
+        <td>eTouch Commenting Tool </td>
+        <td>eTouch Systems Corp.</td>
+        </tr>
+        <tr>
+        <td>Content Rating</td>
+        <td>eTouch Rating Tool </td>
+        <td>eTouch Systems Corp.</td>
+        </tr>
+        <tr>
+        <td>Recommendations</td>
+        <td>Recommendations</td>
+        <td>Baynote, Inc.</td>
+        </tr>
+        <tr>
+        <td>Tagging</td>
+        <td>eTouch Tagging Tool</td>
+        <td>eTouch Systems Corp.</td>
+        </tr>
+        <tr>
+        <td>Tag Cloud</td>
+        <td>Baynote Content Recommendations</td>
+        <td>Baynote, Inc.</td>
+        </tr>
+        <tr>
+        <td>Social Bookmarking</td>
+        <td>AddThis</td>
+        <td>AddThis, LLC</td>
+        </tr>
+        <tr>
+        <td>Moderated Live Chat</td>
+        <td>ParaChat </td>
+        <td>ParaChat Group</td>
+        </tr>
+        <tr>
+        <td>Secure Instant Messaging</td>
+        <td>Jabber </td>
+        <td>Jabber Inc</td>
+        </tr>
+        <tr>
+        <td>Social Network</td>
+        <td>Liferay Portal</td>
+        <td>Liferay</td>
+        </tr>
+        <tr>
+        <td><b>Video Services</b></td>
+        <td>VMIX Online Video Platform</td>
+        <td>VMIX</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <p>Working with limited metadata, eTouch designed an intranet portal and a single CMS repository for more than three million assets including 500,000 webpages. For the intranet portal, eTouch used open source platforms like Liferay and Alfresco, and commercial products such as Google Search Appliance to improve search relevance. The portal merged more than 10 enterprise applications for content management, forums, knowledge management, and databases. eTouch migrated thousands of resources to the new portal, using an agency-wide taxonomy to classify assets.</p>
+        <p>eTouch also created an enterprise-wide community portal, Spacebook, which is based on Liferay portal technology. They migrated all the content of the client's community from their existing intranet portal to Spacebook. For robust and secure access to the agency's applications, eTouch implemented a security platform with centralized authentication, including secure multi-level authentication, for diverse application types.</p>
+        <p>They also planned, managed, executed, and monitored infrastructure activities for the Agency Modernization Program. The team delivered value-added, innovative enterprise technology solutions, including hardware, software, shared applications and data, and security, that were integrated into the agency's modernized infrastructure. </p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>For the agency, the engagement with eTouch resulted in:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Improved accessibility for the public and effective connectivity in near real-time with the public</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved current system, updated technology and implementation of industry best practices</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved agility in adoption of tools and implementation of services </span></li>
+        <li><span class="fa fa-angle-right"></span><span>Efficient connectivity among engineering personnel, with their 3500+ sites accessible from a single portal</span></li>
+        <li><span class="fa fa-angle-right"></span><span>End-to-end knowledge management solution</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Seamless collaboration and social networking among 80,000 employees across 13 centers</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Protection for more than 3000 federated applications</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Savings of over $1 million per year with the migration to a hybrid cloud </span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="awards">
+        <div class="container">
+        <h3 class="heading">Awards</h3>
+        <p>eTouch has won four Webby awards, a Golden Montreux award, a Civil Servant Contractor award for Best Managed Application, and numerous group achievement awards.</p>
+        </div>
+        </article>
+        <article class="testimonials">
+        <div class="container">
+        <h3 class="heading">Client Testimonials</h3>
+        <p class="client-quote">"eTouch demonstrated superior depth of understanding in providing and managing world class web content solutions"</p>
+        <p>– Deputy CIO of the space agency</p>
+        <p class="client-quote">"Even when people are focusing on the very top of the enterprise, nothing works without all of the content that underpins everything. That's the result of your hard work, so take a bow"</p>
+        <p>– Agency Owner</p>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+
+        <!--Section starts here -->
+        <section id="caseStudyContent7" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">eTouch enables machine data analytics product company leverage the legacy platform to help unlock value of stakeholder collaboration</h3>
+        <p>The client provides real-time operational intelligence solutions for machine generated big data to businesses globally. They offer software for monitoring, searching, and analyzing machine-generated data. Their software indexes and correlates diverse data such as user transactions, customer behavior, service levels, security threats, and operational processes. They help derive actionable insights from these diverse data streams.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>The client's customers have a large number of IT applications, databases, third-party applications, and infrastructure components — all on legacy platform &amp; programming languages predominantly PHP. The current team was not able to scale as new business features and existing bugs kept pilling up. Client also didn't have dedicated project management and quality assurance teams. The client wanted to outsource development, testing and management of all IT applications and teams. They wanted to flexibility in ramping up and down team size based on the current utilization and load besides setting up industry best practices in agile methodology and quality processes.  The client wanted to outsources IT services that would:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Refresh the existing technology stack to include new technologies and innovations</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Support multiple platforms and programming languages</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Augment development, testing and project management team</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Clear all existing 800+ bugs in defect tracking system</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Ramp up/down the team as per project needs</span></li>
+        <li><span class="fa fa-angle-right"></span><span>New trained resources within short duration</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Implement agile methodologies for project management</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>eTouch's deep understanding of the hi-tech industry, and their record of innovation in digital engineering, led the client to partner with them. eTouch helped client scale their current team with additional onsite and offshore resources. It implemented scrum based project methodology and testing techniques. eTouch designed and implemented a scalable platform in Java and NodeJS to support migration of existing application and building new applications. eTouch also supported migration of existing legacy CMS platform to new Adobe AEM to enable client to integrate new marketing automation tools.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>With the implementation of new platform and project outsourcing to eTouch, the client benefited from:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Implemented a new platform using Java and Node technologies</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Augment development, testing and project management team</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Cleared over 400+ bugs in defect tracking system in very short duration</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Provided new trained resources within short duration on existing applications and domain knowledge</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Implemented agile methodologies for project management</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Implemented new QA processes</span></li>
+        </ul>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        <!--Section starts here -->
+        <section id="caseStudyContent8" data-speed="7" data-type="background" class="case-studies-content content-section" style="display: none;">
+        <article class="intro">
+        <div class="container">
+        <h3 class="heading">One of the world's largest online advertising companies turns to eTouch to revamp their legacy applications for product promotion, content creation, and customers' ad campaign implementation</h3>
+        <p>Synonymous with information organization, search, and access, the client's products and services are used by more than a billion users worldwide. Their portfolio includes 150+ diverse offerings, from search and ads to email, cloud storage, and a mobile operating system. The client is viewed as a benchmark of innovation in the digital information space.</p>
+        </div>
+        </article>
+        <article class="challenges">
+        <div class="container">
+        <h3 class="heading">Challenges</h3>
+        <p>One of the client's flagship services helps website monetization by placing targeted ads on partner sites. The client's application for this service had a robust ad campaign engine, but insufficient features. Similarly, for creation of their own product promotion content, the client was using a legacy process. Content approvals were conducted over email. The client needed to:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Reduce customers' ad campaign launch times</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Allow their marketing team to use the ad campaign application independent of support from the engineering team</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Streamline the approval process for the customers' product promotion content</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Shorten the product promotion cycle and reduce process errors</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="solution">
+        <div class="container">
+        <h3 class="heading">The Solution</h3>
+        <p>The client chose eTouch as their partner to engineer new, efficient systems for their ad campaign service and their product promotion activities. eTouch re-architected most of the ad campaign application, while reusing the ad campaign engine. eTouch built a dynamic contextual learning system with a distributed highly available architecture. The eTouch team incorporated analytics for the client's customers to track the success of their campaigns. The application was developed in Python that afforded better integration with the back-end processes, and also helped leverage some of the common functions that had already been developed. Scalability was an important factor since the application was project to receive millions of page-views per day.</p>
+        <p>To streamline the client's product promotion cycle, eTouch conceptualized and built a web application that integrates with language translation APIs and generates promotion content in 130 languages. It streamlines the approval process through a custom workflow engine. The solution's capabilities include search functionality, geo-targeting of content, reporting, and cross-domain communication.</p>
+        </div>
+        </article>
+        <article class="benefits">
+        <div class="container">
+        <h3 class="heading">Benefits</h3>
+        <p>With eTouch's solutions, the client saw the following benefits:</p>
+        <ul class="list-unstyled">
+        <li><span class="fa fa-angle-right"></span><span>Reduced time for customers' ad campaign implementation from 3 weeks to 1 day</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Eliminated the need for their engineering team to support the ad campaign application</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved customer satisfaction because of reduced campaign launch times and the availability of analytics data</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Reduced time for the client's product promotion cycle — from 6 weeks to 2 days</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved collaboration between global and local marketing and sales teams</span></li>
+        <li><span class="fa fa-angle-right"></span><span>Improved product branding</span></li>
+        <li><span class="fa fa-angle-right"></span><span>A revenue increase of more than $1 bn</span></li>
+        </ul>
+        </div>
+        </article>
+        <article class="conclusion">
+        <div class="container">
+        <h3 class="heading">Conclusion</h3>
+        <p>eTouch continues to be an integral partner for the client's product engineering teams. The eTouch team supports the ad campaign and product promotion applications, and delivers new features on a regular basis — which help shape upcoming iterations.</p>
+        </div>
+        </article>
+        </section>
+        <!--Section ends here --> 
+        </div>
+        <!--Content Container ends here --> 
+        </div>
   	</body>
 </html>

@@ -14,13 +14,24 @@
                 <div class="col-md-4">
                     <div class="row" if(data.user)>
                         <div class="col-md-5">
-                            <div class="user-profile">    
-                                <img alt="" class="img-circle" src="http://bootdey.com/img/Content/user_1.jpg">
+                            <div class="user-profile">
+                                <div if(data.user.isProfilepicpath)>    
+                                    <img alt="" class="img-circle" src="/img/profiles/${data.user._id}.png">
+                                </div>        
+                                <div class="image-upload" else>
+                                    <form id="uploadProfileImage" action="/uploadProfilePic" method="post" >
+                                        <a href="#" >
+                                            <i class="fa fa-camera fa-3x"></i>
+                                            <br/>Add Photo
+                                        </a>
+                                        <input type="file" id="profilePhotoUpload" name="image"/>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-7"> 
                             <div class="">   
-                                <span id="userName" rel="${data.user.username}" style="font-weight: 700;">
+                                <span id="userName" rel="${data.user._id}" style="font-weight: 700;">
                                     ${data.user.fullname}
                                 </span><br/>    
                                 <span if(data.user)> <a href="/edit"> Edit Profile </a> </span><br/>    
@@ -50,14 +61,48 @@
                         <ul class="friend-list"> Search
                         </ul>
                     </div>
-                    <div id="participants" style="height:500px;overflow:scroll;">
-                        <ul class="friend-list" for(contact in data.contactlists) >
-                            <li id="${contact.username}" class="bounceInDown ">
+                    <div id="pendinglists">
+                        <ul class="friend-list" for(contact in data.pendinglists) >
+                            <li id="${contact._id}" class="bounceInDown ">
                                 <a class="clearfix" href="#">
-                                    <img alt="" 
+                                    <span if(contact.isProfilepicpath)>
+                                        <img alt="" 
+                                    class="img-circle" 
+                                    src="/img/profiles/${contact._id}.png"/>
+                                    </span>
+                                    <span else>
+                                        <img alt="" 
                                     class="img-circle" 
                                     src="http://bootdey.com/img/Content/user_1.jpg"
                                     >
+                                    </span>
+                                    <div class="friend-name">
+                                        <strong>${contact.fullname}</strong>
+                                    </div>
+                                    <div class="last-message text-muted">
+                                        Request Pending
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div> 
+                    <div id="participants" style="height:500px;overflow:scroll;">
+                        <div class="info-msg"></div>
+                        <div class="error-msg"></div>
+                        <ul class="friend-list" for(contact in data.contactlists) >
+                            <li id="${contact._id}" class="bounceInDown ">
+                                <a class="clearfix" href="#">
+                                    <span if(contact.isProfilepicpath)>
+                                        <img alt="" 
+                                    class="img-circle" 
+                                    src="/img/profiles/${contact._id}.png"/>
+                                    </span>
+                                    <span else>
+                                        <img alt="" 
+                                    class="img-circle" 
+                                    src="http://bootdey.com/img/Content/user_1.jpg"
+                                    >
+                                    </span>    
                                     <div class="friend-name">
                                         <strong>${contact.fullname}</strong>
                                     </div>
@@ -78,19 +123,25 @@
                         </ul>
                     </div>    
                </div>
+               <div class="col-md-8 ">
+                    <div class="error-msg" if(data.error)>${data.error}
+                    </div>    
+               </div>
+
                <div class="col-md-8  display-none" id="addContactWindow">
                     <div id="addContactName">
                         <ul class="friend-list">
                             <li class="bounceInDown">
-                                <a class="clearfix" href="#"><img alt="" class="img-circle" src="http://bootdey.com/img/Content/user_1.jpg">
+                                <a class="clearfix" href="#"><img alt="" class="img-circle" src="http://bootdey.com/img/Content/user_1.jpg" alt="Add photo">
                                     <div class="friend-name"><strong></strong></div> 
                                 </a>
                             </li>
                         </ul>
                     </div>
                     &nbsp;
-                    <form id="addContactForm" style='max-width: 300px;'>
-                        <button class="btn btn-primary" type="button" id="add"> Add </button>
+                    <form id="addContactForm" style='max-width: 300px;' method="post" >
+                        <input type='hidden' name="newUserId" id="newUserId">
+                        <button class="btn btn-primary" type="submit" id="add" > Add </button>
                         &nbsp;
                         <button class="btn btn-default" type="button" id="addCancel"> Cancel </button>
                     </form> 
@@ -114,7 +165,8 @@
             </div>    
         </div>
         <script src="/components/socket.io-client/socket.io.js"></script>
-        <script language='JavaScript' type="text/javascript" src="/components/jquery/jquery.js"></script>
+        <script language='JavaScript' type="text/javascript" src="/components/jquery/jquery.min.js"></script>
+        <script language='JavaScript' type="text/javascript" src="/components/jquery-form/jquery.form.js"></script>
         <script language='JavaScript' type="text/javascript" src='/components/bootstrap/dist/js/bootstrap.min.js'></script>
         <script src="/js/socket.js"></script>
         <script src="/js/contact.js"></script>

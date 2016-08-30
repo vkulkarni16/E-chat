@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
   ActiveSession = mongoose.model('ActiveSession');
 
 	function activateSession(session, next){
-	  ActiveSession.findOne( { username: session.username }, function(err, data){
+	  ActiveSession.findOne( { id: session.id }, function(err, data){
 	    if(err)
 	      next(err, data);
 	    else if( data == null){
@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
 	          next(err, data);
 	      })
 	    } else {
-	      ActiveSession.update({ username: session.username }, { $set:{ sessionid: session.sessionid, loggeddate: Date.now(), isactive: true } }, (err, data) => {
+	      ActiveSession.update({ id: session.id }, { $set:{ sessionid: session.sessionid, loggeddate: Date.now(), isactive: true } }, (err, data) => {
 	        if(err)
 	          next(err, data);
 	        else
@@ -39,7 +39,7 @@ var mongoose = require('mongoose'),
 	}
 
 	function getActiveContacts(next){
-	  ActiveSession.find({ isactive: true }, { username: true, fullname: true, _id: false } , function(err, data){
+	  ActiveSession.find({ isactive: true }, { id: true, fullname: true, _id: false } , function(err, data){
 	    if(!err)
 	      next(err, data);
 	    else
@@ -47,8 +47,8 @@ var mongoose = require('mongoose'),
 	  })
 	 }
 
-	function getClientSocketID(username, next) {
-	  ActiveSession.find({ username: username},{ _id : false, sessionid: true }, function(err, data) {
+	function getClientSocketID(id, next) {
+	  ActiveSession.find({ id: id},{ _id : false, sessionid: true }, function(err, data) {
 	    if(!err)
 	      next(err, data);
 	    else

@@ -35,20 +35,10 @@ module.exports = function(app, config, io) {
     resave: false,
     saveUninitialized: false
   }));
+
   app.use(passport.initialize());
   app.use(passport.session());
 
-  //validate authentication
-  // app.use(function(req, res, next) {
-  //   console.log("is loggedIn:"+req.isAuthenticated());
-  //   console.log("req.user:"+req.user);
-  //   console.log("req.session.user:"+req.session.user);
-  //     if(req.user)
-  //       next();
-  //     else
-  //       require('marko').load(require.resolve('./../app/views/login.marko')).render({},res)
-  //     //res.redirect('/login');
-  // });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
